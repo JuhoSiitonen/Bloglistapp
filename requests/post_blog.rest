@@ -1,0 +1,11 @@
+POST http://localhost:3003/api/blogs 
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RpbWllcyIsImlkIjoiNjQ3ZjNhZWUyMDBhMjgwYTBlYjJmYTMxIiwiaWF0IjoxNjg2MDgwNzg0fQ.gwbe0d9g2GbJlhIJdRiQkD3bvCNcitX561nKFEZ2XvQ
+
+{
+   "title": "uus käyttäjä testi tehtvään 22",
+   "author": "Jarmo",
+   "url": "www.ilta.fi",
+   "likes": "15",
+   "userId": "647f3aee200a280a0eb2fa31"
+}
