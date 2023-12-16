@@ -45,7 +45,7 @@ Cypress.Commands.add('createBlog', ({ title, author, url }) => {
   cy.visit('http://localhost:3000')
 })
 
-Cypress.Commands.add('createBlog2', ({ title, author, url , likes}) => {
+Cypress.Commands.add('createBlog2', ({ title, author, url , likes }) => {
   cy.request({
     url: 'http://localhost:3003/api/blogs',
     method: 'POST',

@@ -46,6 +46,7 @@ const AddNewBlogs = ({ handleNewBlog }) => {
             name="Title"
             onChange={handleTitleChange}
             id="testTitle"
+            placeholder='title'
           />
         </div>
         <div>
@@ -55,6 +56,7 @@ const AddNewBlogs = ({ handleNewBlog }) => {
             name="Author"
             onChange={handleAuthorChange}
             id="testAuthor"
+            placeholder='author'
           />
         </div>
         <div>
@@ -64,6 +66,7 @@ const AddNewBlogs = ({ handleNewBlog }) => {
             name="Url"
             onChange={handleUrlChange}
             id="testUrl"
+            placeholder='url'
           />
         </div>
         <br></br>

@@ -7,13 +7,13 @@ import AddNewBlogs from './AddNewBlogs'
 test('pressing create calls form submit with correct values', async () => {
   const mockHandleNewBlog = jest.fn()
   const session = userEvent.setup()
-  const { container } = render(
+  render(
     <AddNewBlogs handleNewBlog={mockHandleNewBlog} />,
   )
 
-  const input = container.querySelector('#testTitle')
-  const input2 = container.querySelector('#testAuthor')
-  const input3 = container.querySelector('#testUrl')
+  const input = screen.getByPlaceholderText('title')
+  const input2 = screen.getByPlaceholderText('author')
+  const input3 = screen.getByPlaceholderText('url')
 
   const sendButton = screen.getByText('create', { exact: false })
 
