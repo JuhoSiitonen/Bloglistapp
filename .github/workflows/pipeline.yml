@@ -13,8 +13,8 @@ jobs:
     runs-on: ubuntu-20.04
     env: 
         SKIP_PREFLIGHT_CHECK: true
-        MONGO_URI: ${{ secrets.MONGO_URI }} 
-        TEST_MONGO_URI: ${{ secrets.TEST_MONGO_URI }}
+        MONGO_URI: ${{ secrets.MONGODB_URI }} 
+        TEST_MONGO_URI: ${{ secrets.TEST_MONGODB_URI }}
         PORT: ${{ secrets.PORT }}
         SECRET: ${{ secrets.SECRET }}
     steps:
