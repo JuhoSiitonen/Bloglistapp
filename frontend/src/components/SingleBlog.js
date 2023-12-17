@@ -2,11 +2,15 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
 import { initializeComments, newComment } from '../reducers/commentReducer'
 import { ListGroup } from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom'
 
-const SingleBlog = ({ blogToSee, addNewLike }) => {
-  //const user = useSelector(({ user }) => user)
-  //const owner = blogToSee.user.username === user.username ? true : false
+const SingleBlog = ({ blogToSee, addNewLike, deleteBlog }) => {
+  const navigate = useNavigate()
+  const user = useSelector(({ user }) => user)
+  const owner = blogToSee.user.username === user.username ? true : false
   const dispatch = useDispatch()
+  console.log(blogToSee.user.username)
+  console.log(user.username)
 
   useEffect(() => {
     dispatch(initializeComments(blogToSee.id))
@@ -25,12 +29,13 @@ const SingleBlog = ({ blogToSee, addNewLike }) => {
     }
     addNewLike(blogObject, blogToSee.id)
   }
-  /*
+
   const handleDeletion = () => {
     if (!window.confirm(`Remove ${blogToSee.title} by ${blogToSee.author}?`)) {
       return
     }
     deleteBlog(blogToSee.id)
+    navigate('/')
   }
 
   const deleteButton = () => {
@@ -40,7 +45,6 @@ const SingleBlog = ({ blogToSee, addNewLike }) => {
       </button>
     )
   }
-  */
 
   const newCommentSubmit = (event) => {
     event.preventDefault()
@@ -64,7 +68,7 @@ const SingleBlog = ({ blogToSee, addNewLike }) => {
       </p>
       {blogToSee.likes} likes <button onClick={handleLikes}>like</button>
       <p>added by {blogToSee.user.username}</p>
-      {/*owner && deleteButton()*/}
+      {owner && deleteButton()}
       <br></br>
       <h3>Comments</h3>
       <form onSubmit={newCommentSubmit}>
