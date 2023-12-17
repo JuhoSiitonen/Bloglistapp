@@ -1,5 +1,8 @@
 #!/bin/bash
 
 echo "Build script"
-npm run build
 npm install 
+cd frontend 
+npm install
+cd ..
+npm run build:ui
