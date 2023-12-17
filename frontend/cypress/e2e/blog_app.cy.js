@@ -49,7 +49,7 @@ describe('Blog app', function() {
           title: 'testiblogi',
           author: 'testitekija',
           url: 'www.testi.fi' })
-        cy.get('tr > :nth-child(1) > a').click()
+        cy.contains('testiblogi').click()
       })
       it('can be liked', function() {
         cy.contains('like').click()
