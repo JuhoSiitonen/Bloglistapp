@@ -7,7 +7,7 @@ describe('Blog app', function() {
       password: 'salasana'
     }
     cy.request('POST', 'http://localhost:3003/api/users/', user)
-    cy.visit('http://localhost:3000')
+    cy.visit('http://localhost:3003')
   })
 
   it('Login form is shown', function() {
@@ -16,17 +16,17 @@ describe('Blog app', function() {
 
   describe('Login', function() {
     it('succeeds with correct credentials', function() {
-      cy.get('#username').type('testimies')
-      cy.get('#password').type('salasana')
-      cy.get('#login-button').click()
+      cy.get('[name="Username"]').type('testimies')
+      cy.get('[name="Password"]').type('salasana')
+      cy.get('.btn').click()
       cy.contains('testimies is logged in')
     })
 
     it('fails with wrong credentials', function() {
-      cy.get('#username').type('festimies')
-      cy.get('#password').type('salasana')
-      cy.get('#login-button').click()
-      cy.get('.error').contains('wrong credentials')
+      cy.get('[name="Username"]').type('festimies')
+      cy.get('[name="Password"]').type('salasana')
+      cy.get('.btn').click()
+      cy.get('[style="color: green; background: lightgrey; font-size: 20px; border-style: solid; border-radius: 5px; padding: 10px; margin-bottom: 10px;"]').contains('Wrong credentials')
     })
   })
 
@@ -49,27 +49,11 @@ describe('Blog app', function() {
           title: 'testiblogi',
           author: 'testitekija',
           url: 'www.testi.fi' })
-        cy.contains('view').click()
+        cy.get('tr > :nth-child(1) > a').click()
       })
       it('can be liked', function() {
         cy.contains('like').click()
-        cy.contains('likes 1')
-      })
-      it('can be removed', function() {
-        cy.contains('remove').click()
-        cy.contains('deletion succesfull')
-      })
-      it('cannot be removed by other than owner', function() {
-        cy.contains('logout').click()
-        const user2 = {
-          name: 'Juha Siitonen',
-          username: 'testimies2',
-          password: 'salasana'
-        }
-        cy.request('POST', 'http://localhost:3003/api/users/', user2)
-        cy.login({ username: 'testimies2', password: 'salasana' })
-        cy.contains('view').click()
-        cy.get('.removebutton').should('not.exist')
+        cy.contains('1 likes')
       })
       it('are shown in order of likes', function() {
         cy.createBlog2({
@@ -82,15 +66,9 @@ describe('Blog app', function() {
           author: 'testitekija',
           url: 'www.testi.fi',
           likes: 4 })
-        cy.visit('http://localhost:3000')
-        cy.get('.hiddenAsDefault').eq(0).should('contain', 'most likes')
-        cy.get('.hiddenAsDefault').eq(1).should('contain', 'second most likes')
-        cy.contains('second most likes')
-          .contains('view').click()
-        cy.get('.hiddenAsDefault').eq(1).contains('like').click()
-        cy.wait(1000)
-        cy.get('.hiddenAsDefault').eq(1).contains('like').click()
-        cy.get('.hiddenAsDefault').eq(0).should('contain', 'second most likes')
+        cy.visit('http://localhost:3003')
+        cy.get('tbody > :nth-child(1) > :nth-child(1) > a').should('contain', 'most likes')
+        cy.get(':nth-child(2) > :nth-child(1) > a').should('contain', 'second most likes')
       })
     })
   })

@@ -6,10 +6,10 @@ const LoginForm = ({ handleLogin }) => (
     <Form onSubmit={handleLogin}>
       <Form.Group>
         <Form.Label>username</Form.Label>
-        <Form.Control type="text" name="Username" />
+        <Form.Control type="text" name="Username" id="username"/>
         <Form.Label>password</Form.Label>
-        <Form.Control type="password" name="Password" />
-        <Button variant="primary" type="submit">
+        <Form.Control type="password" name="Password" id="password"/>
+        <Button variant="primary" type="submit" id="login-button">
           login
         </Button>
       </Form.Group>

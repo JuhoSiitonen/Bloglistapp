@@ -7,6 +7,7 @@ const cors = require('cors')
 const blogsRouter = require('./controllers/blogs')
 const userRouter = require('./controllers/users')
 const loginRouter = require('./controllers/login')
+const healthRouter = require('./controllers/health')
 const middleware = require('./utils/middleware')
 const mongoose = require('mongoose')
 
@@ -32,6 +33,7 @@ app.use(middleware.getTokenFrom)
 app.use('/api/login', loginRouter)
 app.use('/api/blogs', blogsRouter)
 app.use('/api/users', userRouter)
+app.use('/health', healthRouter)
 
 if (process.env.NODE_ENV === 'test') {
   const testingRouter = require('./controllers/testing')
