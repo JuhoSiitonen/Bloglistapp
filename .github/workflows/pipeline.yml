@@ -1,0 +1,33 @@
+name: Deployment pipeline
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
+
+jobs:
+  simple_deployment_pipeline:
+    runs-on: ubuntu-20.04
+    env: 
+        SKIP_PREFLIGHT_CHECK: true
+        MONGO_URI: ${{ secrets.MONGO_URI }} 
+        TEST_MONGO_URI: ${{ secrets.TEST_MONGO_URI }}
+        PORT: ${{ secrets.PORT }}
+        SECRET: ${{ secrets.SECRET }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: npm install && cd client && npm install
+      - name: lint
+        run: npm run lint:both
+      - name: build
+        run: npm run build:ui
+      - name: test
+        run: npm run test:both

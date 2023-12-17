@@ -8,21 +8,26 @@
     "dev": "cross-env NODE_ENV=development nodemon index.js",
     "test": "cross-env NODE_ENV=test jest --verbose --runInBand",
     "lint": "eslint .",
+    "lint:ui": "cd frontend/ && npm run eslint",
+    "lint:both": "npm run lint && npm run lint:ui",
     "start:test": "cross-env NODE_ENV=test node index.js",
     "build:ui": "rm -rf build && cd frontend/ && npm run build && cp -r build ../ && cd ..",
     "test:both": "npm run test && npm run test:ui",
     "test:ui": "cd frontend/ && npm test"
   },
+  "engines": {
+    "node": ">=16.19.1 <17.0.0"
+  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/JuhoSiitonen/Fullstackopen-part4.git"
+    "url": "git+https://github.com/JuhoSiitonen/Bloglistapp.git"
   },
   "author": "Juho Siitonen",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/JuhoSiitonen/Fullstackopen-part4/issues"
+    "url": "https://github.com/JuhoSiitonen/Bloglistapp/issues"
   },
-  "homepage": "https://github.com/JuhoSiitonen/Fullstackopen-part4#readme",
+  "homepage": "https://github.com/JuhoSiitonen/Bloglistapp#readme",
   "dependencies": {
     "bcrypt": "^5.1.0",
     "cors": "^2.8.5",
