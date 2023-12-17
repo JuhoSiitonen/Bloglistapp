@@ -13,7 +13,8 @@
     "start:test": "cross-env NODE_ENV=test node index.js",
     "build:ui": "rm -rf build && cd frontend/ && npm run build && cp -r build ../ && cd ..",
     "test:both": "npm run test && npm run test:ui",
-    "test:ui": "cd frontend/ && npm test"
+    "test:ui": "cd frontend/ && npm test",
+    "test:cypress": "cd frontend/ && npm run test:e2e"
   },
   "engines": {
     "node": ">=16.19.1 <17.0.0"
