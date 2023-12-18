@@ -49,10 +49,12 @@ describe('Blog app', function() {
           title: 'testiblogi',
           author: 'testitekija',
           url: 'www.testi.fi' })
+        cy.wait(500)
         cy.contains('testiblogi').click()
       })
       it('can be liked', function() {
         cy.contains('like').click()
+        cy.wait(500)
         cy.contains('1 likes')
       })
       it('are shown in order of likes', function() {
