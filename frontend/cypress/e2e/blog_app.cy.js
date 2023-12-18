@@ -40,7 +40,7 @@ describe('Blog app', function() {
       cy.get('#testAuthor').type('testitekija')
       cy.get('#testUrl').type('www.testi.fi')
       cy.get('#createButton').click()
-      cy.contains('testiblogi')
+      cy.contains('testiblog1')
     })
 
     describe('Blogs', function() {
