@@ -9,8 +9,6 @@ const SingleBlog = ({ blogToSee, addNewLike, deleteBlog }) => {
   const user = useSelector(({ user }) => user)
   const owner = blogToSee.user.username === user.username ? true : false
   const dispatch = useDispatch()
-  console.log(blogToSee.user.username)
-  console.log(user.username)
 
   useEffect(() => {
     dispatch(initializeComments(blogToSee.id))
