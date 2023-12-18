@@ -38,5 +38,39 @@ jobs:
           command: npm run test:cypress
           start: npm run start:test
           wait-on: http://localhost:3003
-      
+      - name: Deploy to production
+        if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip')}}
+        run: curl ${{ secrets.RENDER_DEPLOY }}
+  
+      - name: Notify if new version is committed
+        uses: rjstone/discord-webhook-notify@v1
+        if: success()
+        with:
+          severity: info
+          details: New Build Successfully Deployed!
+          webhookUrl: ${{ secrets.WEBHOOK }}
+      - name: Notify if new version failed
+        uses: rjstone/discord-webhook-notify@v1
+        if: failure()
+        with: 
+          severity: error
+          details: |
+              Deployment failed!
+              Commit Message: ${{ github.event.commits[0].message }}
+              Committer: ${{ github.event.head_commit.committer.name }}
+              Author: ${{ github.event.head_commit.author.name }}
+              Commit URL: ${{ github.event.head_commit.url }}
+          webhookUrl: ${{ secrets.WEBHOOK }}
+  
+  tag_release:
+    needs: [simple_deployment_pipeline]
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - name: Bump version and push tag
+        if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip') }}
+        uses: anothrNick/github-tag-action@1.67.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
       
