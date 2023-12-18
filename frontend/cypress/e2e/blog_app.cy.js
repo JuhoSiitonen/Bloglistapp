@@ -36,7 +36,7 @@ describe('Blog app', function() {
     })
     it('a new note can be created', function() {
       cy.contains('create').click()
-      cy.get('#testTitle').type('testiblogi1')
+      cy.get('#testTitle').type('testiblog1')
       cy.get('#testAuthor').type('testitekija')
       cy.get('#testUrl').type('www.testi.fi')
       cy.get('#createButton').click()
